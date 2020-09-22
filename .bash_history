@@ -49,3 +49,11 @@ clear
 ls
 sudo su 
 sudo su
+sudo su 
+sudous
+sudo su
+cd react_project/
+ls
+clear
+ls
+vim travis.yml
