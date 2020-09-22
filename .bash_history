@@ -57,3 +57,8 @@ ls
 clear
 ls
 vim travis.yml
+clear
+ls
+docker login
+sudo s
+sudo su 

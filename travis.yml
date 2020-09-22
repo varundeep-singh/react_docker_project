@@ -1,0 +1,28 @@
+sudo: required
+services:
+        - docker
+
+
+
+before_install:
+        - docker build -t varundeep/react-test -f .react_project/client/Dockerfile.dev .react_project/client
+
+
+script:
+        - docker run varundeep/react-test npm test -- --coverage
+
+
+after_success:
+        - docker build -t varundeep/multi-client ./react_project/client
+        - docker build -t varundeep/multi-worker ./react_project/worker
+        - docker build -t varundeep/multi-nginx ./react_project/nginx
+        - docker build -t varundeep/multi-server ./react_project/server
+
+
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+        - docker push varundeep/multi-client
+        - docker push varundeep/multi-worker
+        - docker push varundeep/multi-nginx
+        - docker push varundeep/multi-server
+
